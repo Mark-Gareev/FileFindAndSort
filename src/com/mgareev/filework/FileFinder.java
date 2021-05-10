@@ -35,13 +35,13 @@ public class FileFinder {
         @Override
 
         public FileVisitResult visitFile(Path file, BasicFileAttributes attr) {
-            StringBuilder filename = new StringBuilder(file.getFileName().toString());
-            if ((file.getFileName().toString().charAt(0) != '.') && !(attr.isDirectory())) {
-                if (!textfiles.containsKey(filename.toString()))
-                    textfiles.put(filename.toString(), file);
-                else {
-                    filename.append(equalnamecounter);
-                    textfiles.put(filename.toString(), file);
+            String filename = file.getFileName().toString();
+            if ((filename.charAt(0) != '.') && !(attr.isDirectory())) {
+                if (!textfiles.containsKey(filename)) {
+                    textfiles.put(filename, file);
+                } else {
+                    filename += equalnamecounter;
+                    textfiles.put(filename, file);
                     equalnamecounter++;
                 }
                 return FileVisitResult.CONTINUE;

@@ -11,13 +11,13 @@ import java.util.*;
  */
 public class FileConcater {
 
-    private Map<String, Path> filemap;
+    private Map<String, Path> fileMap;
 
-    public void sortAndConcat(Path resultpath) throws IOException {
+    public void concatenate(Path resultpath) throws IOException {
         List<String> lines;
         Files.createFile(resultpath);
         StringBuilder buffer = new StringBuilder();
-        for (Map.Entry<String, Path> file : filemap.entrySet()) {
+        for (Map.Entry<String, Path> file : fileMap.entrySet()) {
             lines = Files.readAllLines(file.getValue());
 
             for (String item : lines) {
@@ -28,8 +28,8 @@ public class FileConcater {
         Files.writeString(resultpath, buffer.toString());
     }
 
-    public FileConcater(Map<String, Path> filemap) {
-        this.filemap = filemap;
+    public FileConcater(Map<String, Path> fileMap) {
+        this.fileMap = fileMap;
     }
 
 
